@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -21,7 +20,7 @@ public class UserMapper {
                 .tasks(user.getTasks() != null
                         ? user.getTasks().stream()
                         .map(taskMapper::toDTO)
-                        .collect(Collectors.toList())
+                        .toList()
                         : new ArrayList<>())
                 .build();
     }
@@ -32,7 +31,7 @@ public class UserMapper {
                 .tasks(userDto.getTasks() != null
                         ? userDto.getTasks().stream()
                         .map(taskMapper::toEntity)
-                        .collect(Collectors.toList())
+                        .toList()
                         : new ArrayList<>())
                 .build();
     }
@@ -40,12 +39,12 @@ public class UserMapper {
     public List<UserDTO> toDTOs(List<User> users) {
         return users.stream()
                 .map(this::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<User> toEntities(List<UserDTO> userDTOs) {
         return userDTOs.stream()
                 .map(this::toEntity)
-                .collect(Collectors.toList());
+                .toList();
     }
 }
